@@ -148,11 +148,11 @@ int main (void)
 	
 	
 	// Pressure
-// 	static_sensor.ss_pin = IOPORT_CREATE_PIN(PORTC, 4);
-// 	//Initialize the SPI interface
-// 	spi_init(&SPIC, &PORTC);
-// 	ioport_configure_pin(static_sensor.ss_pin, IOPORT_DIR_OUTPUT || IOPORT_INIT_HIGH);
-// 	pressure_init(&static_sensor);
+ 	static_sensor.ss_pin = IOPORT_CREATE_PIN(PORTC, 4);
+ 	//Initialize the SPI interface
+ 	spi_init(&SPIC, &PORTC);
+ 	ioport_configure_pin(static_sensor.ss_pin, IOPORT_DIR_OUTPUT || IOPORT_INIT_HIGH);
+ 	pressure_init(&static_sensor);
 	
 	
 	
@@ -188,7 +188,7 @@ int main (void)
 	PORTB.DIR = 0b00000111; // On Board LED
 	
 
-	printf("Packet #,   Pitch,    Roll,     Yaw,  AccX,  AccY,  AccZ, GyroX, GyroY, GyroZ,  MagX,  MagY,  MagZ,IMUTemp,HPSTemp,EXTTemp,BATTemp,PMTTemp\n");
+	printf("Packet #,  Pitch,   Roll,    Yaw, AccX, AccY, AccZ,GyroX,GyroY,GyroZ, MagX, MagY, MagZ,IMUTp,HPSTp,EXTTp,BATTp,PMTTp\n");
 
 
 

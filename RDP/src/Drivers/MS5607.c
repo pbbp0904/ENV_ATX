@@ -131,7 +131,7 @@ double readMS5607(MS5607* sensor)
 	//printf("D1: %lu D2: %lu P: %lu \n",sensor->D1,sensor->D2,P);
 	//printf("Pitot Tube MS5607 Calibration Constants:\nC1:%u\nC2:%u\nC3:%u\nC4:%u\nC5:%u\nC6:%u\n",sensor->C1,sensor->C2,sensor->C3,sensor->C4,sensor->C5,sensor->C6);
 
-	return altitude;
+	return msPressure;
 }
 
 void updateAltitude(void)
