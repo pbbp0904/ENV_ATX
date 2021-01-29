@@ -148,11 +148,11 @@ int main (void)
 	
 	
 	// Pressure
- 	static_sensor.ss_pin = IOPORT_CREATE_PIN(PORTC, 4);
+ 	//static_sensor.ss_pin = IOPORT_CREATE_PIN(PORTC, 4);
  	//Initialize the SPI interface
- 	spi_init(&SPIC, &PORTC);
- 	ioport_configure_pin(static_sensor.ss_pin, IOPORT_DIR_OUTPUT || IOPORT_INIT_HIGH);
- 	pressure_init(&static_sensor);
+ 	//spi_init(&SPIC, &PORTC);
+ 	//ioport_configure_pin(static_sensor.ss_pin, IOPORT_DIR_OUTPUT || IOPORT_INIT_HIGH);
+ 	//pressure_init(&static_sensor);
 	
 	
 	
@@ -331,7 +331,7 @@ while(1){
 		while(ring_pop(&gps_ring, &gps_data)==0) { // returns 0 on success so keep going while we have data
 			printf("%c", gps_data);
 			GPSCounter++;
-			if (GPSCounter>250)
+			if (GPSCounter>238)
 			{
 				GPSLock = 1;
 			}else{
