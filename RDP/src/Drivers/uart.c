@@ -25,6 +25,24 @@ void uart_sd_init()
 	
 }
 
+void uart_gps_init_default()
+{
+	sysclk_enable_peripheral_clock(UART_GPS_SERIAL);	// enable the USART's clock
+	// initialize a configuration struct with USART settings
+	static usart_serial_options_t usart_config = {
+		.baudrate	=	UART_GPS_SERIAL_BAUDRATE_DEFAULT,
+		.charlength =	UART_GPS_SERIAL_CHAR_LEN,
+		.paritytype =	UART_GPS_SERIAL_PARITY,
+		.stopbits	=	UART_GPS_SERIAL_STOP_BIT
+	};
+	
+	UART_GPS_PORT.DIR |= UART_GPS_TX_PIN;	// set the USART transmit pin to output
+	
+	stdio_serial_init(UART_GPS_SERIAL, &usart_config);
+	USARTC0.CTRLA |= 0x10;
+	PMIC.CTRL |= PMIC_LOLVLEX_bm;
+}
+
 void uart_gps_init()
 {
 	sysclk_enable_peripheral_clock(UART_GPS_SERIAL);	// enable the USART's clock
@@ -35,6 +53,8 @@ void uart_gps_init()
 		.paritytype =	UART_GPS_SERIAL_PARITY,
 		.stopbits	=	UART_GPS_SERIAL_STOP_BIT
 	};
+	
+	UART_GPS_PORT.DIR |= UART_GPS_TX_PIN;	// set the USART transmit pin to output
 	
 	stdio_serial_init(UART_GPS_SERIAL, &usart_config);
 	USARTC0.CTRLA |= 0x10;
