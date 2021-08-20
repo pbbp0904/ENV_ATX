@@ -132,13 +132,15 @@ int main (void)
 	sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_HIRES); //Enable GPS HiRes
 	sysclk_enable_peripheral_clock(&ADCA);             //Voltage
 	adc_init();
+	
 	uart_gps_init_default();
 	//printf("$PUBX,41,1,0007,0003,38400,0*20\r\n");
 	//uart_gps_init();
 	
 	
 	delay_ms(30);
-	//  THIS COMMAND SETS FLIGHT MODE
+	// COMMANDS FOUND AT (https://www.u-blox.com/sites/default/files/products/documents/u-blox8-M8_ReceiverDescrProtSpec_UBX-13003221.pdf)
+	//  THIS COMMAND SETS FLIGHT MODE (airborne mode)
 	uint8_t setNav[] = {0xB5, 0x62, 0x06, 0x24, 0x24, 0x00, 0xFF, 0xFF, 0x06, 0x03, 0x00, 0x00, 0x00, 0x00, 0x10, 0x27, 0x00, 0x00, 0x05, 0x00, 0xFA, 0x00, 0xFA, 0x00, 0x64, 0x00, 0x2C, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0xDC };
 	for(int j=0;j<3;j++)
 	{
@@ -147,6 +149,7 @@ int main (void)
 			printf("%c",setNav[i]);
 		}
 		printf("\n");
+		delay_ms(30);
 	}
 	
 	delay_ms(30);
@@ -159,6 +162,7 @@ int main (void)
 			printf("%c",setGLL[i]);
 		}
 		printf("\r\n");
+		delay_ms(30);
 	}
 	
 	delay_ms(30);
@@ -171,6 +175,7 @@ int main (void)
 			printf("%c",setGSV[i]);
 		}
 		printf("\r\n");
+		delay_ms(30);
 	}
 	
 	delay_ms(30);
@@ -183,6 +188,7 @@ int main (void)
 			printf("%c",setGST[i]);
 		}
 		printf("\r\n");
+		delay_ms(30);
 	}
 	
 
@@ -196,9 +202,13 @@ int main (void)
 			printf("%c",setUBX04[i]);
 		}
 		printf("\r\n");
+		delay_ms(30);
 	}
 	
+	
+	/*
 	delay_ms(30);
+	// Do not use with OpenLog. Causes Instabilities.
 	//  THIS COMMAND ENABLES 1hz TIM-TP
 	uint8_t setTIMTPP[] = {0xB5, 0x62, 0x06, 0x01, 0x08, 0x00, 0x0D, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x23, 0x27};
 	for(int j=0;j<3;j++)
@@ -209,7 +219,7 @@ int main (void)
 		}
 		printf("\r\n");
 	}
-	
+	*/
 	
 	delay_ms(30);
 	
@@ -423,7 +433,7 @@ while(1){
 			printf("%c", gps_data);
 			GPSCounter++;
 			delay_us(850);
-			if (GPSCounter>380)
+			if (GPSCounter>335)
 			{
 				GPSLock = 1;
 			}else{
