@@ -405,8 +405,9 @@ while(1){
 		for (int i = 0; i < 4; i++)// Reading temp values
 		{
 			adc_set_pin(i+1);
-			delay_ms(5);
+			delay_ms(3);
 			adcValues[i] = adc_read();
+			delay_ms(3);
 		}
 		
 		

@@ -31,12 +31,14 @@ void adc_set_pin(uint8_t pin)
 	}else{
 		ADCA.CH0.MUXCTRL = 0b00100000; // pin 4
 	}
+	delay_ms(1);
 }
 
 int16_t adc_read(void)
 {
 	ADCA.CH0.CTRL |= 0x80; // start the conversion
 	while(!(ADCA.CH0.INTFLAGS)); // wait until the conversion is done
+	delay_ms(1);
 	ADCA.CH0.INTFLAGS = 0; // Set the flag back to false
 	return ADCA.CH0.RES; // return the 12-bit result as a uint16_t
 }
